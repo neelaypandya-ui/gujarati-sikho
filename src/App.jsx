@@ -117,14 +117,14 @@ const CATEGORIES = {
   colors: {
     label: "Colors", emoji: "🎨", color: "#C24B8B",
     words: [
-      { gujarati: "લાલ", roman: "Laal", english: "Red", pronunciation: "LAAL", tip: "Like 'lull' but with an open 'aa' sound." },
-      { gujarati: "વાદળી", roman: "Vaadli", english: "Blue", pronunciation: "VAAD-lee", tip: "'Vaad' rhymes with 'rod', 'lee' as in the name Lee." },
-      { gujarati: "લીલો", roman: "Leelo", english: "Green", pronunciation: "LEE-loh", tip: "'Lee' as in the name, 'lo' as in 'low'." },
-      { gujarati: "પીળો", roman: "Peelo", english: "Yellow", pronunciation: "PEE-loh", tip: "'Pee' as in the letter P, 'lo' as in 'low'." },
-      { gujarati: "સફેદ", roman: "Safed", english: "White", pronunciation: "suh-FED", tip: "'Sa' is quick, 'fed' as in the English word. Stress on 'fed'." },
-      { gujarati: "કાળો", roman: "Kaalo", english: "Black", pronunciation: "KAA-loh", tip: "'Kaa' as in 'car', 'lo' as in 'low'." },
-      { gujarati: "નારંગી", roman: "Naarangi", english: "Orange", pronunciation: "naa-RUN-gee", tip: "'Naa' as in 'nah', 'run' as in running, 'gee' as in 'geese'." },
-      { gujarati: "ગુલાબી", roman: "Gulaabi", english: "Pink", pronunciation: "goo-LAA-bee", tip: "'Goo' as in 'good', 'laa' as in 'la la la', 'bee' as the insect." },
+      { gujarati: "લાલ", roman: "Laal", english: "Red", pronunciation: "LAAL", color: "#E53935", tip: "Like 'lull' but with an open 'aa' sound." },
+      { gujarati: "વાદળી", roman: "Vaadli", english: "Blue", pronunciation: "VAAD-lee", color: "#1E88E5", tip: "'Vaad' rhymes with 'rod', 'lee' as in the name Lee." },
+      { gujarati: "લીલો", roman: "Leelo", english: "Green", pronunciation: "LEE-loh", color: "#43A047", tip: "'Lee' as in the name, 'lo' as in 'low'." },
+      { gujarati: "પીળો", roman: "Peelo", english: "Yellow", pronunciation: "PEE-loh", color: "#F9A825", tip: "'Pee' as in the letter P, 'lo' as in 'low'." },
+      { gujarati: "સફેદ", roman: "Safed", english: "White", pronunciation: "suh-FED", color: "#90A4AE", tip: "'Sa' is quick, 'fed' as in the English word. Stress on 'fed'." },
+      { gujarati: "કાળો", roman: "Kaalo", english: "Black", pronunciation: "KAA-loh", color: "#37474F", tip: "'Kaa' as in 'car', 'lo' as in 'low'." },
+      { gujarati: "નારંગી", roman: "Naarangi", english: "Orange", pronunciation: "naa-RUN-gee", color: "#FB8C00", tip: "'Naa' as in 'nah', 'run' as in running, 'gee' as in 'geese'." },
+      { gujarati: "ગુલાબી", roman: "Gulaabi", english: "Pink", pronunciation: "goo-LAA-bee", color: "#E91E8C", tip: "'Goo' as in 'good', 'laa' as in 'la la la', 'bee' as the insect." },
     ]
   },
   animals: {
@@ -494,7 +494,7 @@ export default function App() {
             <button onClick={() => setScreen("home")} style={{ background: "none", border: "none", cursor: "pointer", fontWeight: 700, color: "#8b7d74", fontSize: 14, marginBottom: 12, padding: 0 }}>← Back</button>
             <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}><span style={{ fontSize: 28 }}>{c.emoji}</span><div><div style={{ fontFamily: "'Baloo 2'", fontSize: 20, fontWeight: 700 }}>{c.label}</div><div style={{ fontSize: 12, color: "#8b7d74" }}>Card {cardIdx + 1} of {c.words.length}</div></div></div>
             <ProgressBar current={cardIdx + 1} total={c.words.length} color={c.color} />
-            <div style={{ marginTop: 20 }}><FlashCard word={w} flipped={flipped} onFlip={() => setFlipped(!flipped)} color={c.color} voiceName={voiceName} speakRate={speakRate} /></div>
+            <div style={{ marginTop: 20 }}><FlashCard word={w} flipped={flipped} onFlip={() => setFlipped(!flipped)} color={w.color || c.color} voiceName={voiceName} speakRate={speakRate} /></div>
             <div style={{ display: "flex", gap: 10, marginTop: 20, justifyContent: "center" }}>
               <button disabled={cardIdx === 0} onClick={() => { setCardIdx(i => i - 1); setFlipped(false); }} style={{ padding: "12px 24px", borderRadius: 14, border: "2px solid #e8e0d8", background: "white", cursor: cardIdx === 0 ? "default" : "pointer", fontWeight: 700, fontSize: 14, color: "#6b5e54", opacity: cardIdx === 0 ? 0.4 : 1 }}>← Prev</button>
               <button onClick={() => { markLearned(selectedCat); if (cardIdx < c.words.length - 1) { setCardIdx(i => i + 1); setFlipped(false); } }} disabled={cardIdx === c.words.length - 1} style={{ padding: "12px 24px", borderRadius: 14, border: "none", background: c.color, color: "white", cursor: cardIdx === c.words.length - 1 ? "default" : "pointer", fontWeight: 700, fontSize: 14, opacity: cardIdx === c.words.length - 1 ? 0.5 : 1 }}>Next →</button>
